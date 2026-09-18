@@ -1,0 +1,7 @@
+aoi: https://raw.githubusercontent.com/eoap/schemas/main/geojson.yaml#Polygon  # type 'https://raw.githubusercontent.com/eoap/schemas/main/geojson.yaml#Polygon' (optional)
+post_event:  # type 'Directory'
+    class: Directory
+    path: a/directory/path
+pre_event:  # type 'Directory'
+    class: Directory
+    path: a/directory/path
