@@ -1,4 +1,4 @@
-# Copyright 2026 Transpiler-Mate
+# Copyright 2026 Terradue
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,9 +41,7 @@ class CWL2InputsOptions(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    output: Path = Field(
-        default=Path("inputs.yaml"), description="The output YAML file path"
-    )
+    output: Path = Field(default=Path("inputs.yaml"), description="The output YAML file path")
 
 
 def _remove_anonymous_enum_names(value: Any) -> None:
@@ -72,9 +70,7 @@ def generate_template(context: TranspilerContext) -> str:
         source.write_text(json.dumps(document), encoding="utf-8")
         loading_context = LoadingContext()
         loading_context.construct_tool_object = default_make_tool
-        tool = load_tool(
-            f"{source.as_uri()}#{quote(process.id, safe='/')}", loading_context
-        )
+        tool = load_tool(f"{source.as_uri()}#{quote(process.id, safe='/')}", loading_context)
         output = StringIO()
         make_template(tool, output)
         return output.getvalue()

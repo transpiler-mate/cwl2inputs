@@ -1,4 +1,4 @@
-# Copyright 2026 Transpiler-Mate
+# Copyright 2026 Terradue
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -74,9 +74,7 @@ $graph:
 """
 
 
-def make_context(
-    document: str = DOCUMENT, process_id: str | None = "main"
-) -> TranspilerContext:
+def make_context(document: str = DOCUMENT, process_id: str | None = "main") -> TranspilerContext:
     loaded = load_cwl_from_string_content(document)
     processes = loaded if isinstance(loaded, list) else [loaded]
     return TranspilerContext.model_construct(
@@ -100,11 +98,10 @@ def test_template_matches_cwltool(tmp_path: Path) -> None:
     )
     output = tmp_path / "nested" / "inputs.yaml"
     cwl2inputs.execute(context, CWL2InputsOptions(output=output))
-    assert YAML(typ="safe").load(output.read_text()) == YAML(typ="safe").load(
-        expected.getvalue()
-    )
+    assert YAML(typ="safe").load(output.read_text()) == YAML(typ="safe").load(expected.getvalue())
     template = YAML(typ="safe").load(output.read_text())
-    assert template["count"] == 7
+    expected_count = 7
+    assert template["count"] == expected_count
     assert template["pre_event"]["class"] == "Directory"
     assert template["files"][0]["class"] == "File"
     assert template["settings"]["enabled"] is False
@@ -112,22 +109,16 @@ def test_template_matches_cwltool(tmp_path: Path) -> None:
 
 
 def test_selected_tool_only() -> None:
-    template = YAML(typ="safe").load(
-        generate_template(make_context(process_id="other"))
-    )
+    template = YAML(typ="safe").load(generate_template(make_context(process_id="other")))
     assert template == {"message": "hello"}
 
 
 @pytest.mark.parametrize("process_id", [None, "missing"])
-def test_invalid_selection_preserves_output(
-    tmp_path: Path, process_id: str | None
-) -> None:
+def test_invalid_selection_preserves_output(tmp_path: Path, process_id: str | None) -> None:
     output = tmp_path / "inputs.yaml"
     output.write_text("existing")
     with pytest.raises(PluginExecutionError):
-        cwl2inputs.execute(
-            make_context(process_id=process_id), CWL2InputsOptions(output=output)
-        )
+        cwl2inputs.execute(make_context(process_id=process_id), CWL2InputsOptions(output=output))
     assert output.read_text() == "existing"
 
 

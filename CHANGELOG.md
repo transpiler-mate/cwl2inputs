@@ -1,5 +1,5 @@
 <!--
-Copyright 2026 Transpiler-Mate
+Copyright 2026 Terradue
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -23,6 +23,30 @@ and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.1.1] - 2026-09-28
+
+### Changed
+
+- Improved type annotations and internal code quality by addressing mypy, Ruff, and Bandit findings, without changing public APIs or runtime behavior.
+
+## [0.1.0] - 2026-09-18
+
+### Added
+
 - Transpiler-Mate plugin for YAML input template generation through cwltool APIs.
 - Explicit process selection and configurable output path, defaulting to `inputs.yaml`.
 - Template-based Python packaging, CI, tests, and Diátaxis documentation.
+
+[Unreleased]: https://github.com/Transpiler-Mate/cwl2inputs/compare/v0.1.1...develop
+[0.1.1]: https://github.com/Transpiler-Mate/cwl2inputs/compare/v0.1.0...v0.1.1
+[0.1.0]: https://github.com/Transpiler-Mate/cwl2inputs/releases/tag/v0.1.0
